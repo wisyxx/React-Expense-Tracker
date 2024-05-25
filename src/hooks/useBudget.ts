@@ -8,7 +8,5 @@ export const useBudget = () => {
     throw new Error('useBudget must be used within a BudgetProvider');
   }
 
-  return {
-    context,
-  };
+  return context;
 };
