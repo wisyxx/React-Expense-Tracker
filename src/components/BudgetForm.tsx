@@ -32,7 +32,9 @@ export const BudgetForm = () => {
       <input
         id="budget"
         type="number"
-        className=" w-full bg-white border border-gray-200 p-2 font-bold rounded-lg focus:outline-none focus:ring-2 ring-blue-800 transition duration-300 ease-in-out"
+        className=" w-full bg-white border border-gray-200 p-2 font-bold 
+        rounded-lg focus:outline-none focus:ring-2 ring-blue-800 transition 
+        duration-300 ease-in-out"
         placeholder="Define your budget"
         name="budget"
         onChange={handleChange}
