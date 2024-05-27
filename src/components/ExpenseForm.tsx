@@ -1,8 +1,17 @@
+import { useState } from 'react';
+import DatePicker from 'react-date-picker';
 import { categories } from '../data/categories';
 import { formatCurrency } from '../helpers';
+import 'react-date-picker/dist/DatePicker.css';
+import 'react-calendar/dist/Calendar.css';
 
 export const ExpenseForm = () => {
   const EXAMPLE_AMOUNT = 50;
+
+  /* Calendar */
+  type ValuePiece = Date | null;
+  type Value = ValuePiece | [ValuePiece, ValuePiece];
+  const [value, onChange] = useState<Value>(new Date());
 
   return (
     <form className=" space-y-5">
@@ -58,6 +67,17 @@ export const ExpenseForm = () => {
             </option>
           ))}
         </select>
+      </div>
+
+      <div className=" flex flex-col gap-2">
+        <label htmlFor="date" className=" text-xl">
+          Date:
+        </label>
+        <DatePicker
+          className=" bg-slate-100 p-2 border-0"
+          onChange={onChange}
+          value={value}
+        />
       </div>
 
       <input
