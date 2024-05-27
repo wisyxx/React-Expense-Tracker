@@ -1,24 +1,58 @@
-import { useState } from 'react';
+import { ChangeEvent, FormEvent, useState } from 'react';
 import DatePicker from 'react-date-picker';
 import { categories } from '../data/categories';
 import { formatCurrency } from '../helpers';
+import { ErrorMessage } from './ErrorMessage';
+import type { DraftExpense, Value } from '../types';
 import 'react-date-picker/dist/DatePicker.css';
 import 'react-calendar/dist/Calendar.css';
 
 export const ExpenseForm = () => {
   const EXAMPLE_AMOUNT = 50;
 
-  /* Calendar */
-  const [value, onChange] = useState<Value>(new Date());
+  const [expense, setExpense] = useState<DraftExpense>({
+    expenseName: '',
+    amount: 0,
+    category: '',
+    date: new Date(),
+  });
+  const [error, setError] = useState('');
+
+  const handleChange = (
+    e: ChangeEvent<HTMLInputElement | HTMLSelectElement>
+  ) => {
+    const { name, value } = e.target;
+
+    const isAmountField = ['amount'].includes(name);
+    setExpense({
+      ...expense,
+      [name]: isAmountField ? +value : value,
+    });
+  };
+
+  const handleChangeDate = (value: Value) => {
+    setExpense({ ...expense, date: value });
+  };
+
+  const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+
+    // Validate
+    if (Object.values(expense).includes('')) {
+      setError('You must fill all the fields');
+    }
+  };
 
   return (
-    <form className=" space-y-5">
+    <form className=" space-y-5" onSubmit={handleSubmit}>
       <legend
         className=" uppercase text-center text-2xl font-black border-b-4
        border-blue-500 py-2"
       >
         New expense
       </legend>
+
+      {error && <ErrorMessage>{error}</ErrorMessage>}
 
       <div className=" flex flex-col gap-2">
         <label htmlFor="expenseName" className=" text-xl">
@@ -31,11 +65,13 @@ export const ExpenseForm = () => {
           className=" p-2 focus:outline-none focus:ring-[3px] ring-blue-500 transition 
         duration-300 ease-in-out rounded-sm"
           placeholder="Ex: Groceries, Shoes..."
+          value={expense.expenseName}
+          onChange={handleChange}
         />
       </div>
       <div className=" flex flex-col gap-2">
         <label htmlFor="amount" className=" text-xl">
-          Expense name:
+          Amount:
         </label>
         <input
           type="number"
@@ -44,17 +80,20 @@ export const ExpenseForm = () => {
           className=" p-2 focus:outline-none focus:ring-[3px] ring-blue-500 transition 
         duration-300 ease-in-out rounded-sm"
           placeholder={`Ex: ${formatCurrency(EXAMPLE_AMOUNT)}`}
+          value={expense.amount}
+          onChange={handleChange}
         />
       </div>
       <div className=" flex flex-col gap-2">
         <label htmlFor="amount" className=" text-xl">
-          Expense name:
+          Expense type:
         </label>
         <select
           name="category"
           id="category"
           className=" p-2 focus:outline-none focus:ring-[3px] ring-blue-500 transition 
         duration-300 ease-in-out rounded-sm"
+          onChange={handleChange}
         >
           <option disabled selected value="">
             Select category
@@ -73,8 +112,8 @@ export const ExpenseForm = () => {
         </label>
         <DatePicker
           className=" bg-slate-100 p-2 border-0"
-          onChange={onChange}
-          value={value}
+          value={expense.date}
+          onChange={handleChangeDate}
         />
       </div>
 
