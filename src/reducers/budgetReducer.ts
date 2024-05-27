@@ -1,7 +1,8 @@
 export type BudgetActions =
   | { type: 'define-budget'; payload: { budget: number } }
   | { type: 'show-modal' }
-  | { type: 'close-modal' };
+  | { type: 'close-modal' }
+  | {type: 'add-expense'};
 
 export type BudgetState = {
   budget: number;

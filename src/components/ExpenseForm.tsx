@@ -9,8 +9,6 @@ export const ExpenseForm = () => {
   const EXAMPLE_AMOUNT = 50;
 
   /* Calendar */
-  type ValuePiece = Date | null;
-  type Value = ValuePiece | [ValuePiece, ValuePiece];
   const [value, onChange] = useState<Value>(new Date());
 
   return (
