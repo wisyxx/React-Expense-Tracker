@@ -11,16 +11,23 @@ import {
   TrailingActions,
 } from 'react-swipeable-list';
 import 'react-swipeable-list/dist/styles.css';
+import { useBudget } from '../hooks/useBudget';
 
 type ExpenseDetailsProps = {
   expense: Expense;
 };
 
 export const ExpenseDetails = ({ expense }: ExpenseDetailsProps) => {
+  const { dispatch } = useBudget();
+
+  const { id, expenseName, category, amount, date } = expense;
+
   const categoryInfo = useMemo(
-    () => categories.filter((cat) => cat.id === expense.category)[0],
+    () => categories.filter((cat) => cat.id === category)[0],
     [expense]
   );
+
+  // Swipe actions
   const leadingActions = () => (
     <LeadingActions>
       <SwipeAction onClick={() => {}}>Update</SwipeAction>
@@ -28,13 +35,18 @@ export const ExpenseDetails = ({ expense }: ExpenseDetailsProps) => {
   );
   const trailingActions = () => (
     <TrailingActions>
-      <SwipeAction onClick={() => {}}>Delete</SwipeAction>
+      <SwipeAction
+        onClick={() => {
+          dispatch({ type: 'remove-expense', payload: { id } });
+        }}
+      >
+        Delete
+      </SwipeAction>
     </TrailingActions>
   );
   return (
     <SwipeableList>
       <SwipeableListItem
-        maxSwipe={30}
         leadingActions={leadingActions()}
         trailingActions={trailingActions()}
       >
@@ -50,13 +62,13 @@ export const ExpenseDetails = ({ expense }: ExpenseDetailsProps) => {
             <p className="text-sm font-bold uppercase text-slate-500">
               {`Category: ${categoryInfo.name}`}
             </p>
-            <p>{expense.expenseName}</p>
+            <p>{expenseName}</p>
             <p className=" text-slate-600 text-sm">
-              {formatDate(expense.date!.toString())}
+              {formatDate(date!.toString())}
             </p>
           </div>
 
-          <AmountDisplay amount={expense.amount} />
+          <AmountDisplay amount={amount} />
         </div>
       </SwipeableListItem>
     </SwipeableList>
