@@ -1,8 +1,9 @@
 import { ChangeEvent, FormEvent, useState } from 'react';
+import { useBudget } from '../hooks/useBudget';
 import DatePicker from 'react-date-picker';
-import { categories } from '../data/categories';
 import { formatCurrency } from '../helpers';
 import { ErrorMessage } from './ErrorMessage';
+import { categories } from '../data/categories';
 import type { DraftExpense, Value } from '../types';
 import 'react-date-picker/dist/DatePicker.css';
 import 'react-calendar/dist/Calendar.css';
@@ -17,6 +18,7 @@ export const ExpenseForm = () => {
     date: new Date(),
   });
   const [error, setError] = useState('');
+  const { dispatch } = useBudget();
 
   const handleChange = (
     e: ChangeEvent<HTMLInputElement | HTMLSelectElement>
@@ -40,7 +42,14 @@ export const ExpenseForm = () => {
     // Validate
     if (Object.values(expense).includes('')) {
       setError('You must fill all the fields');
+      return;
     }
+
+    // Add new expense
+    dispatch({
+      type: 'add-expense',
+      payload: { expenses: expense },
+    });
   };
 
   return (
