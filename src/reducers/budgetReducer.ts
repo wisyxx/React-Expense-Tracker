@@ -6,6 +6,7 @@ export type BudgetActions =
   | { type: 'show-modal' }
   | { type: 'close-modal' }
   | { type: 'add-expense'; payload: { expenses: DraftExpense } }
+  // TODO: confirmation modal
   | { type: 'reset-app' };
 
 export type BudgetState = {
