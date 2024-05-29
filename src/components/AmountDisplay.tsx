@@ -11,7 +11,11 @@ export const AmountDisplay = ({ label, amount }: AmountDisplayProps) => {
       className={`text-2xl text-blue-600 font-bold ${label ? 'mt-6' : 'mt-2'}`}
     >
       {label && `${label}: `}
-      <span className=" font-black text-black">{formatCurrency(amount)}</span>
+      <span
+        className={`font-black ${amount < 0 ? 'text-pink-600' : 'text-black'}`}
+      >
+        {formatCurrency(amount)}
+      </span>
     </p>
   );
 };
