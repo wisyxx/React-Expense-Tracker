@@ -30,7 +30,13 @@ export const ExpenseDetails = ({ expense }: ExpenseDetailsProps) => {
   // Swipe actions
   const leadingActions = () => (
     <LeadingActions>
-      <SwipeAction onClick={() => {}}>Update</SwipeAction>
+      <SwipeAction
+        onClick={() => {
+          dispatch({ type: 'get-expense-by-id', payload: { id } });
+        }}
+      >
+        Update
+      </SwipeAction>
     </LeadingActions>
   );
   const trailingActions = () => (
