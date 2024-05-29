@@ -8,6 +8,10 @@ import { ExpenseList } from './components/ExpenseList';
 const App = () => {
   const { state } = useBudget();
 
+  if (state.budget === 0) {
+    state.resetModal = false;
+  }
+
   useEffect(() => {
     localStorage.setItem('budget', state.budget.toString());
     localStorage.setItem('expenses', JSON.stringify(state.expenses));
@@ -24,7 +28,11 @@ const App = () => {
       </header>
 
       <div className=" max-w-3xl mx-auto bg-white shadow-lg rounded-lg mt-10 p-10">
-        {isValidBudget ? <BudgetTracker /> : <BudgetForm />}
+        {isValidBudget ? (
+          <BudgetTracker showReset={!state.resetModal} />
+        ) : (
+          <BudgetForm />
+        )}
       </div>
 
       {isValidBudget && (

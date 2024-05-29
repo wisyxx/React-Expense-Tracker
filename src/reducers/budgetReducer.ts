@@ -5,16 +5,18 @@ export type BudgetActions =
   | { type: 'define-budget'; payload: { budget: number } }
   | { type: 'show-modal' }
   | { type: 'close-modal' }
+  | { type: 'show-reset-modal' }
+  | { type: 'close-reset-modal' }
   | { type: 'add-expense'; payload: { expenses: DraftExpense } }
   | { type: 'remove-expense'; payload: { id: Expense['id'] } }
   | { type: 'update-expense'; payload: { expense: Expense } }
   | { type: 'get-expense-by-id'; payload: { id: Expense['id'] } }
-  // TODO: confirmation modal
   | { type: 'reset-app' };
 
 export type BudgetState = {
   budget: number;
   modal: boolean;
+  resetModal: boolean;
   expenses: Expense[];
   editingId: Expense['id'];
 };
@@ -31,6 +33,7 @@ const initialExpenses = (): Expense[] => {
 export const initialState: BudgetState = {
   budget: initialBudget(),
   modal: false,
+  resetModal: false,
   expenses: initialExpenses(),
   editingId: '',
 };
@@ -99,6 +102,18 @@ export const budgetReducer = (
       ),
       modal: !state.modal,
       editingId: '',
+    };
+  }
+  if (action.type === 'show-reset-modal') {
+    return {
+      ...state,
+      resetModal: true,
+    };
+  }
+  if (action.type === 'close-reset-modal') {
+    return {
+      ...state,
+      resetModal: false,
     };
   }
   if (action.type === 'reset-app') {
