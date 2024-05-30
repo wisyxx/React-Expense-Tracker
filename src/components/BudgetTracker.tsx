@@ -34,7 +34,7 @@ export const BudgetTracker = ({ showReset }: BudgetTrackerProps) => {
         />
       </div>
 
-      <div className=" flex flex-col justify-center items-center">
+      <div className=" flex flex-col justify-center items-center md:ml-8">
         {showReset && (
           <button
             onClick={() => dispatch({ type: 'show-reset-modal' })}

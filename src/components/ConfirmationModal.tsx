@@ -9,8 +9,8 @@ export const ConfirmationModal = ({ show }: ConfirmationModalProps) => {
   if (show) {
     return (
       <div
-        className=" shadow-2xl max-w-5xl bg-white p-5 flex flex-col rounded-lg
-         justify-center items-center"
+        className=" shadow-2xl max-w-5xl bg-slate-100 p-5 flex flex-col rounded-lg
+         justify-center items-center mt-5 md:mt-0"
       >
         <p>Are you sure?</p>
         <div className=" space-x-4 mt-3">
