@@ -58,26 +58,28 @@ export const ExpenseDetails = ({ expense }: ExpenseDetailsProps) => {
       >
         <div
           className=" select-none bg-white shadow-lg p-6 w-full border-b
-         border-gray-200 flex items-center gap-6"
+         border-gray-200"
         >
-          <div>
-            <img
-              className="w-20"
-              src={`/icon_${categoryInfo.icon}.svg`}
-              alt="Category icon"
-            />
-          </div>
-          <div className=" flex-1 space-y-2">
-            <p className="text-sm font-bold uppercase text-slate-500">
-              {`Category: ${categoryInfo.name}`}
-            </p>
-            <p>{expenseName}</p>
-            <p className=" text-slate-600 text-sm">
-              {formatDate(date!.toString())}
-            </p>
-          </div>
+          <div className="flex flex-col md:flex-row gap-5 items-center">
+            <div>
+              <img
+                className="w-10 md:w-20"
+                src={`/icon_${categoryInfo.icon}.svg`}
+                alt="Category icon"
+              />
+            </div>
+            <div className=" flex-1 space-y-2 gap-6">
+              <p className="text-sm font-bold uppercase text-slate-500">
+                {`Category: ${categoryInfo.name}`}
+              </p>
+              <p>{expenseName}</p>
+              <p className=" text-slate-600 text-sm">
+                {formatDate(date!.toString())}
+              </p>
+            </div>
 
-          <AmountDisplay amount={amount} />
+            <AmountDisplay amount={amount} />
+          </div>
         </div>
       </SwipeableListItem>
     </SwipeableList>

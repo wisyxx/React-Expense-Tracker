@@ -23,12 +23,12 @@ const App = () => {
   return (
     <>
       <header className=" bg-blue-600 py-8 max-h-72">
-        <h1 className=" uppercase text-center font-black text-4xl text-white">
+        <h1 className=" uppercase text-center font-black text-2xl md:text-4xl text-white">
           Expense Tracker
         </h1>
       </header>
 
-      <div className=" max-w-3xl mx-auto bg-white shadow-lg rounded-lg mt-10 p-10">
+      <div className=" max-w-3xl mx-6 md:mx-auto bg-white shadow-lg rounded-lg mt-10 p-10">
         {isValidBudget ? (
           <BudgetTracker showReset={!state.resetModal} />
         ) : (
@@ -37,7 +37,7 @@ const App = () => {
       </div>
 
       {isValidBudget && (
-        <main className=" max-w-3xl mx-auto py-10">
+        <main className=" max-w-3xl mx-6 md:mx-auto py-10">
           <FilterByCategory />
           <ExpenseList />
           <ExpenseModal />

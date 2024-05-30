@@ -13,7 +13,7 @@ export const FilterByCategory = () => {
     <div className=" bg-white shadow-lg rounded-lg p-10">
       <form>
         <div className="flex flex-col md:flex-row md:items-center gap-5">
-          <label htmlFor="category">Filter expenses</label>
+          <label htmlFor="category" className=' font-bold'>Filter expenses</label>
           <select
             name="category"
             id="category"

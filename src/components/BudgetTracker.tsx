@@ -38,8 +38,8 @@ export const BudgetTracker = ({ showReset }: BudgetTrackerProps) => {
         {showReset && (
           <button
             onClick={() => dispatch({ type: 'show-reset-modal' })}
-            className=" bg-pink-600 w-full p-2 text-white 
-          uppercase font-bold rounded-lg hover:bg-pink-500
+            className=" bg-pink-600  p-2 text-white 
+          mt-5 md:mt-0 w-full uppercase font-bold rounded-lg hover:bg-pink-500
           transition-all duration-[250ms]"
           >
             Reset
