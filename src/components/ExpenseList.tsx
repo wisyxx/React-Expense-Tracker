@@ -10,7 +10,7 @@ export const ExpenseList = () => {
 
   return (
     
-        <div className=" mt-10">
+        <div className=" mt-10 shadow-lg bg-white rounded-lg p-10">
           {IS_EMPTY ? (
             <p className=" text-gray-600 text-2xl font-bold">
               No expenses yet!

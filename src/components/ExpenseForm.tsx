@@ -112,17 +112,18 @@ export const ExpenseForm = () => {
         />
       </div>
       <div className=" flex flex-col gap-2">
-        <label htmlFor="amount" className=" text-xl">
+        <label htmlFor="category" className=" text-xl">
           Expense type:
         </label>
         <select
+          defaultValue={'DEFAULT'}
           name="category"
           id="category"
           className=" p-2 focus:outline-none focus:ring-[3px] ring-blue-500 transition 
-        duration-300 ease-in-out rounded-sm"
+          duration-300 ease-in-out rounded-sm"
           onChange={handleChange}
         >
-          <option disabled selected value="">
+          <option disabled value="DEFAULT">
             Select category
           </option>
           {categories.map((category) => (
@@ -134,9 +135,7 @@ export const ExpenseForm = () => {
       </div>
 
       <div className=" flex flex-col gap-2">
-        <label htmlFor="date" className=" text-xl">
-          Date:
-        </label>
+        <label className=" text-xl">Date:</label>
         <DatePicker
           className=" bg-slate-100 p-2 border-0"
           value={expense.date}

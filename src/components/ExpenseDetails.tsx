@@ -56,7 +56,8 @@ export const ExpenseDetails = ({ expense }: ExpenseDetailsProps) => {
         leadingActions={leadingActions()}
         trailingActions={trailingActions()}
       >
-        <div className=" select-none bg-white shadow-lg p-10 w-full border-b border-gray-200 flex gap-6">
+        <div className=" select-none bg-white shadow-lg p-6 w-full border-b
+         border-gray-200 flex items-center gap-6">
           <div>
             <img
               className="w-20"
